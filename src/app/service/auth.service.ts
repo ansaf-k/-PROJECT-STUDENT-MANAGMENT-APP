@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { auth } from '../config/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from 'firebase/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
       localStorage.setItem('token','true');  
       this.router.navigate(['/dashboard']);
     },err => {
-      alert(err.message);
+      console.warn(err)
       this.router.navigate(['/login']);
     })
   }
@@ -34,7 +34,7 @@ export class AuthService {
   logout(){
     signOut(auth).then(()=>{
       localStorage.removeItem('token');
-      this.router.navigate(['/login']);
+      this.router.navigate(['login']);
     },err => {
       alert(err.message);
     })

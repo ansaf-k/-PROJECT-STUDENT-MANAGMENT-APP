@@ -10,16 +10,12 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent {
 
   email:string = '';
   password:string = '';
 
   auth = inject(AuthService)
-
-  ngOnInit(): void {
-      
-  }
 
   register(){
     if(this.email == ''){
