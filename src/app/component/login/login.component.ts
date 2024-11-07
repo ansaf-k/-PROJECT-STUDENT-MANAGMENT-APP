@@ -1,23 +1,27 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../service/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule,FormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class RegisterComponent {
+export class LoginComponent implements OnInit{
 
   email:string = '';
   password:string = '';
 
-  auth = inject(AuthService)
+  auth = inject(AuthService);
 
-  register(){
+  ngOnInit(): void {
+      
+  }
+
+  login(){
     if(this.email == ''){
       alert('please enter email');
       return;
@@ -28,10 +32,17 @@ export class RegisterComponent {
       return;
     }
 
-    this.auth.register(this.email,this.password);
+    this.auth.login(this.email,this.password);
 
     this.email = '';
     this.password = '';
 
+
   }
+
+  signinwithGoogle(){
+    this.auth.googlesignin();
+  }
+
+  
 }
